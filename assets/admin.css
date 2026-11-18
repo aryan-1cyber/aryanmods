@@ -1,0 +1,203 @@
+/* Admin page only. */
+
+.admin-main { padding-top: 30px; }
+
+.admin-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.admin-head h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+
+.admin-head p { margin: 0; }
+
+.admin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.admin-pill { text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; }
+
+.draft-note {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border: 1px solid #4a3f1d;
+  border-radius: 10px;
+  background: rgba(180, 140, 30, 0.12);
+  font-size: 13px;
+  color: #d8b45a;
+}
+
+.link-btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin-left: 6px;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.admin-list h2 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dim-note { font-size: 12px; color: var(--dim); text-transform: none; letter-spacing: 0; }
+
+.admin-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+
+.admin-item {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.admin-item:hover { background: var(--surface-2); }
+
+.admin-item.is-active { border-color: var(--accent); background: var(--surface-2); }
+
+.admin-item .ai-main { min-width: 0; }
+
+.admin-item strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-item small { font-size: 11.5px; color: var(--dim); }
+
+.admin-item .icon { width: 32px; height: 32px; border-radius: 8px; font-size: 12px; }
+
+.admin-empty-list { font-size: 13px; color: var(--muted); margin: 0; }
+
+/* form extras */
+
+.sub {
+  margin: 22px 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.repeat-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+
+.repeat-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.repeat-row.release-row {
+  grid-template-columns: 110px 150px minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.repeat-row input,
+.repeat-row textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.repeat-row textarea { resize: vertical; min-height: 34px; }
+
+.repeat-row input:focus,
+.repeat-row textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.16);
+}
+
+.row-remove {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.row-remove:hover { color: #ff7a7a; border-color: #6b3434; }
+
+.btn-sm { padding: 7px 13px; font-size: 13px; border-radius: 9px; }
+
+.btn-danger { border-color: #5d2b2b; color: #ff8f8f; }
+
+.btn-danger:hover { background: rgba(255, 90, 90, 0.1); }
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 12px 0 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.check-row input { accent-color: var(--accent); }
+
+.gh-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#publish code {
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.empty.small { padding: 50px 16px; }
+
+.empty.small h2 { font-size: 16px; }
+
+@media (max-width: 900px) {
+  .admin-grid { grid-template-columns: 1fr; }
+  .repeat-row,
+  .repeat-row.release-row { grid-template-columns: 1fr; }
+  .gh-grid { grid-template-columns: 1fr; }
+}
