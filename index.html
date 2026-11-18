@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AppVault — App Downloads</title>
+<meta name="description" content="Browse and download Android apps.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script src="data/site.js"></script>
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('av-theme');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" data-site-mark>A</span>
+      <span data-site-name>AppVault</span>
+    </a>
+
+    <nav class="header-nav">
+      <a href="index.html">Apps</a>
+      <a href="changelog.html">What&rsquo;s new</a>
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-13v2m0 12v2M4 12H2m20 0h-2M5.6 5.6 4.2 4.2m15.6 15.6-1.4-1.4m0-12.8 1.4-1.4M4.2 19.8l1.4-1.4"/></svg>
+      </button>
+    </nav>
+
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.9 12.1l4.3 4.3-1.4 1.4-4.3-4.3A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
+      <input id="search" type="search" placeholder="Search apps…" autocomplete="off" aria-label="Search apps">
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1 data-site-hero-title>Apps, ready to install</h1>
+    <p data-site-hero-subtitle>Pick an app, hit download. No pop-ups, no fake buttons.</p>
+  </section>
+
+  <div class="toolbar">
+    <div id="chips" class="chips" role="group" aria-label="Filter by category"></div>
+    <div class="toolbar-right">
+      <select id="sort" class="sort" aria-label="Sort apps">
+        <option value="name">Name A–Z</option>
+        <option value="updated">Recently updated</option>
+      </select>
+      <div class="view-toggle" role="group" aria-label="Layout">
+        <button type="button" class="vt-btn is-active" data-view="grid" title="Grid view" aria-label="Grid view">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </button>
+        <button type="button" class="vt-btn" data-view="list" title="List view" aria-label="List view">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p id="count" class="count"></p>
+  <div id="grid" class="grid"></div>
+
+  <div id="empty" class="empty" hidden>
+    <h2>Nothing here</h2>
+    <p>Try a different search or category.</p>
+  </div>
+
+  <section class="panel updates-panel">
+    <div class="panel-head">
+      <h2>What&rsquo;s new</h2>
+      <a class="link" href="changelog.html">See all updates</a>
+    </div>
+    <ul id="latestUpdates" class="updates"></ul>
+  </section>
+
+  <section class="panel" id="request">
+    <h2>Request an app</h2>
+    <p class="muted">Can&rsquo;t find something? Tell us what to add.</p>
+    <form id="requestForm" class="form-grid" novalidate>
+      <div class="field">
+        <label for="reqName">App name</label>
+        <input id="reqName" name="name" type="text" placeholder="App you want" required>
+      </div>
+      <div class="field">
+        <label for="reqLink">Link <span class="opt">(optional)</span></label>
+        <input id="reqLink" name="link" type="url" placeholder="https://">
+      </div>
+      <div class="field">
+        <label for="reqEmail">Your email</label>
+        <input id="reqEmail" name="email" type="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field field-wide">
+        <label for="reqMessage">Message <span class="opt">(optional)</span></label>
+        <textarea id="reqMessage" name="message" rows="3" placeholder="Anything else we should know?"></textarea>
+      </div>
+      <div class="field field-wide form-actions">
+        <button class="btn btn-primary" type="submit">Send request</button>
+        <span id="requestStatus" class="status" role="status"></span>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p data-site-footer>AppVault · Built as a static site.</p>
+    <nav id="socials" class="socials"></nav>
+  </div>
+</footer>
+
+<script src="data/apps.js"></script>
+<script src="data/updates.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
