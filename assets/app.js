@@ -368,6 +368,48 @@ function initRequestForm() {
   });
 }
 
+/* --------------------------- offers / support --------------------------- */
+
+function initOffers() {
+  const section = document.getElementById('support');
+  const grid = document.getElementById('offerGrid');
+  if (!section || !grid) return;
+
+  const cfg = window.OFFERS || {};
+  const items = (Array.isArray(cfg.items) ? cfg.items : []).filter((o) => o && o.url);
+  const support = (Array.isArray(cfg.support) ? cfg.support : []).filter((s) => s && s.url);
+
+  if (!items.length && !support.length) {
+    section.remove();
+    return;
+  }
+
+  document.getElementById('supportButtons').innerHTML = support
+    .map((s) => `<a class="btn btn-primary" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)}</a>`)
+    .join('');
+
+  grid.innerHTML = items
+    .map(
+      (o) => `
+      <a class="offer" href="${esc(o.url)}" target="_blank" rel="sponsored nofollow noopener noreferrer">
+        <span class="offer-tag">${esc(o.tag || 'Partner')}</span>
+        <strong>${esc(o.label)}</strong>
+        <span class="offer-note">${esc(o.note || '')}</span>
+      </a>`
+    )
+    .join('');
+
+  if (items.length) {
+    const badge = document.getElementById('offerBadge');
+    if (badge) badge.hidden = false;
+    const disclosure = document.getElementById('offerDisclosure');
+    if (disclosure && cfg.disclose) {
+      disclosure.textContent = cfg.disclose;
+      disclosure.hidden = false;
+    }
+  }
+}
+
 /* --------------------------------- boot -------------------------------- */
 
 applyBrand();
@@ -376,6 +418,7 @@ initUpdates();
 initList();
 initDetail();
 initRequestForm();
+initOffers();
 
 if (!document.title.includes(SITE.name) && document.getElementById('grid')) {
   document.title = `${SITE.name} — App Downloads`;
