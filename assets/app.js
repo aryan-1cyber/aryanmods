@@ -410,6 +410,67 @@ function initOffers() {
   }
 }
 
+/* --------------------------------- deals -------------------------------- */
+
+function initDeals() {
+  const section = document.getElementById('deals');
+  const grid = document.getElementById('dealsGrid');
+  if (!section || !grid) return;
+
+  const cfg = window.DEALS || {};
+  const items = (Array.isArray(cfg.items) ? cfg.items : []).filter(
+    (d) => d && /^https?:\/\//i.test(String(d.url || ''))
+  );
+
+  if (!cfg.enabled || !items.length) {
+    section.remove();
+    return;
+  }
+
+  const title = document.getElementById('dealsTitle');
+  if (title && cfg.title) title.textContent = cfg.title;
+
+  const initials = (name) =>
+    String(name || '?')
+      .trim()
+      .split(/\s+/)
+      .map((w) => w.charAt(0))
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+
+  grid.innerHTML = items
+    .map((d) => {
+      const mark = /^https?:\/\//i.test(String(d.image || ''))
+        ? `<img src="${esc(d.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
+        : `<span class="deal-mark" style="background:${esc(d.accent || '#2b3550')}">${esc(initials(d.merchant))}</span>`;
+
+      return `
+      <a class="deal" href="${esc(d.url)}" target="_blank" rel="sponsored nofollow noopener noreferrer">
+        ${mark}
+        <span class="deal-body">
+          <span class="deal-tag">${esc(d.merchant || 'Deal')}</span>
+          <strong>${esc(d.title || '')}</strong>
+          ${d.note ? `<span class="deal-note">${esc(d.note)}</span>` : ''}
+          <span class="deal-foot">
+            ${d.price ? `<span class="deal-price">${esc(d.price)}</span>` : ''}
+            ${d.was ? `<span class="deal-was">${esc(d.was)}</span>` : ''}
+            <span class="deal-cta">View deal</span>
+          </span>
+        </span>
+      </a>`;
+    })
+    .join('');
+
+  section.hidden = false;
+
+  const disclosure = document.getElementById('dealsDisclosure');
+  if (disclosure && cfg.disclose) {
+    disclosure.textContent = cfg.disclose;
+    disclosure.hidden = false;
+  }
+}
+
 /* --------------------------------- boot -------------------------------- */
 
 applyBrand();
@@ -419,6 +480,7 @@ initList();
 initDetail();
 initRequestForm();
 initOffers();
+initDeals();
 
 if (!document.title.includes(SITE.name) && document.getElementById('grid')) {
   document.title = `${SITE.name} — App Downloads`;
