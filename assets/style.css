@@ -757,6 +757,22 @@ main { flex: 1; padding-bottom: 64px; }
   color: var(--accent);
 }
 
+/* ------------------------------ telegram -------------------------------- */
+
+.tg-actions { margin: 14px 0 0; }
+
+.tg-hint {
+  margin: 18px 0 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.tg-hint a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ------------------------------ request form ---------------------------- */
 
 .form-grid {

@@ -471,6 +471,35 @@ function initDeals() {
   }
 }
 
+/* ------------------------------ telegram -------------------------------- */
+
+function initTelegram() {
+  const link = String(SITE.telegram || '').trim();
+  const valid = /^https:\/\/t\.me\/[A-Za-z0-9_]{3,}$/.test(link);
+
+  const panel = document.getElementById('telegram');
+  if (panel) {
+    if (!valid) {
+      panel.remove();
+    } else {
+      panel.querySelectorAll('[data-telegram-link]').forEach((a) => {
+        a.href = link;
+      });
+      panel.hidden = false;
+    }
+  }
+
+  document.querySelectorAll('[data-telegram-hint]').forEach((el) => {
+    if (!valid) {
+      el.remove();
+      return;
+    }
+    const a = el.querySelector('a');
+    if (a) a.href = link;
+    el.hidden = false;
+  });
+}
+
 /* --------------------------------- boot -------------------------------- */
 
 applyBrand();
@@ -481,6 +510,7 @@ initDetail();
 initRequestForm();
 initOffers();
 initDeals();
+initTelegram();
 
 if (!document.title.includes(SITE.name) && document.getElementById('grid')) {
   document.title = `${SITE.name} — App Downloads`;
