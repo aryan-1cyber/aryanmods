@@ -1,0 +1,13 @@
+# ads.txt — authorised digital sellers
+#
+# This file only works at the ROOT of a domain you control, i.e.
+#   https://yourdomain.com/ads.txt
+# A GitHub Pages project page (aryan-1cyber.github.io/aryanmods) cannot serve
+# an ads.txt for its subpath, because the root belongs to github.io.
+#
+# When you connect a custom domain and AdSense approves the site:
+#   1. open AdSense -> Sites -> your site -> ads.txt
+#   2. copy the exact line it gives you
+#   3. replace the commented example below with it (uncomment it)
+#
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

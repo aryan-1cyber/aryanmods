@@ -47,6 +47,11 @@
 
   <ul id="updatesList" class="updates updates-full"></ul>
 
+  <aside class="ad-slot" data-ad-slot="changelog" aria-label="Advertisement" hidden>
+    <span class="ad-label">Advertisement</span>
+    <div class="ad-body"></div>
+  </aside>
+
   <section class="panel">
     <h2>Looking for an app?</h2>
     <p class="muted">Send us a request and we&rsquo;ll take a look.</p>
@@ -57,12 +62,20 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <p data-site-footer>aryanmods · Built as a static site.</p>
+    <nav class="footer-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <button type="button" data-cookie-settings>Cookie settings</button>
+    </nav>
     <nav id="socials" class="socials"></nav>
   </div>
 </footer>
 
 <script src="data/apps.js"></script>
 <script src="data/updates.js"></script>
+<script src="data/ads.config.js"></script>
+<script src="assets/consent.js"></script>
+<script src="assets/ads.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

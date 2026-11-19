@@ -7,17 +7,24 @@ apk-site/
 ├── index.html          home: search, filters, grid/list, latest updates, request form
 ├── app.html            app page (app.html?id=slug)
 ├── changelog.html      "What's new" page
+├── privacy.html        privacy policy (required for ad networks)
+├── terms.html          terms of use
 ├── admin.html          app manager (noindex, not linked from the site)
+├── ads.txt             seller records — only works on a custom domain root
 ├── assets/
 │   ├── style.css       dark + light theme
 │   ├── app.js          rendering, search, theme toggle, form
+│   ├── consent.js      cookie/ads banner, stores one choice
+│   ├── ads.js          AdSense loader + slot renderer
 │   ├── admin.css       admin-only styles
 │   ├── admin.js        admin logic + GitHub publishing
 │   └── favicon.svg
 ├── data/
 │   ├── site.js         <-- site name, colours, footer, contact settings
 │   ├── apps.js         <-- your app list
-│   └── updates.js      <-- changelog entries
+│   ├── updates.js      <-- changelog entries
+│   ├── affiliates.js   <-- support buttons + affiliate cards
+│   └── ads.config.js   <-- ad switch, publisher id, ad unit ids
 ├── icons/              put 512x512 PNGs here
 ├── robots.txt          keeps admin.html out of search results
 └── .gitignore          ignores APKs and secrets
@@ -96,6 +103,71 @@ Open `data/updates.js` and add to the top of the array:
 ```
 
 The home page shows the latest 3; `changelog.html` shows all of them.
+
+## Ads (AdSense, off by default)
+
+All ad code is already wired in and **disabled**. Nothing loads, no cookies are set,
+no banner appears until you turn it on in `data/ads.config.js`:
+
+```js
+window.ADS = {
+  enabled: false,          // 1. flip to true when AdSense approves you
+  consentRequired: true,
+  preview: false,          // true = dashed placeholder boxes, no network calls
+  client: "",              // 2. "ca-pub-XXXXXXXXXXXXXXXX"
+  slots: {
+    homeFeed: "",          // 3. ad unit id (the number after the slash)
+    appDetail: "",
+    changelog: ""
+  }
+};
+```
+
+How it behaves:
+
+- **Consent first.** `assets/consent.js` shows a banner with *Accept ads* / *No thanks*
+  and stores the answer in `localStorage`. The AdSense script is only injected after
+  a visitor accepts — no policy-free "load now, ask later".
+- **Slots stay hidden** if there is no unit id, no publisher id, or no consent. No
+  empty grey boxes on the page.
+- **`preview: true`** paints dashed placeholders so you can check placement without an
+  account. It never contacts Google.
+- **`Cookie settings`** in the footer re-opens the banner.
+
+Placement lives in the HTML as one block per slot, so moving an ad is a cut and paste:
+
+```html
+<aside class="ad-slot" data-ad-slot="homeFeed" aria-label="Advertisement" hidden>
+  <span class="ad-label">Advertisement</span>
+  <div class="ad-body"></div>
+</aside>
+```
+
+What approval still needs, and cannot be solved by code:
+
+1. A **custom domain** — `github.io` subdomains are not accepted by AdSense.
+2. A root **ads.txt** at that domain (AdSense → Sites → ads.txt gives the line).
+3. Real content and the policies already included here (`privacy.html`, `terms.html`).
+
+There is deliberately **no anti-adblock script, no popunder and no redirect ad**. Those
+networks pay a fraction of AdSense and get domains and accounts banned.
+
+## Affiliate and support links
+
+`data/affiliates.js` drives the "Support the site" panel:
+
+```js
+window.OFFERS = {
+  disclose: "Some links on this page are affiliate links…",
+  support: [{ label: "Buy me a coffee", url: "https://ko-fi.com/yourname" }],
+  items: [{ label: "EarnKaro", tag: "Cashback", note: "…", url: "https://your-tracking-link" }]
+};
+```
+
+The shipped URLs are the programmes' homepages — they earn nothing until you replace
+them with your own referral links. Affiliate anchors are rendered with
+`rel="sponsored nofollow noopener noreferrer"`. Emptying `items` and `support` removes
+the whole panel.
 
 ## App request form
 
