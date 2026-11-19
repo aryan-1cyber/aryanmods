@@ -632,6 +632,44 @@ main { flex: 1; padding-bottom: 64px; }
   background: var(--surface);
 }
 
+/* ------------------------------ offers ---------------------------------- */
+
+.offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.offer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-2);
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.offer:hover { border-color: #34496a; transform: translateY(-1px); }
+
+.offer-tag {
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.offer strong { font-size: 14px; font-weight: 650; }
+
+.offer-note { font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+
 /* ------------------------------ request form ---------------------------- */
 
 .form-grid {
