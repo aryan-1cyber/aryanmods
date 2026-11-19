@@ -7,6 +7,7 @@ apk-site/
 ├── index.html          home: search, filters, grid/list, latest updates, request form
 ├── app.html            app page (app.html?id=slug)
 ├── changelog.html      "What's new" page
+├── channel.html        Telegram-style feed of every app release
 ├── privacy.html        privacy policy (required for ad networks)
 ├── terms.html          terms of use
 ├── admin.html          app manager (noindex, not linked from the site)
@@ -151,6 +152,19 @@ What approval still needs, and cannot be solved by code:
 
 There is deliberately **no anti-adblock script, no popunder and no redirect ad**. Those
 networks pay a fraction of AdSense and get domains and accounts banned.
+
+## Channel page (`channel.html`)
+
+A Telegram-look feed of your releases, built from the same `data/apps.js` — change
+an app once and both the site and the channel page update.
+
+- posts sorted newest-first, each with download buttons and a details link
+- one ad slot (`channel`) after the second post, governed by the same consent flow
+- "Join" appears only when `telegram` is set in `data/site.js`
+
+It is a **web mirror**, not Telegram itself: nothing is posted to your real channel
+automatically. Copy a post text from here into the app, or ask for the bot that
+posts new entries for you.
 
 ## Telegram channel
 
