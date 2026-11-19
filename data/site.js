@@ -27,6 +27,10 @@ window.SITE = {
   formEndpoint: "",
   contactEmail: "",
 
+  // Telegram channel (optional). Paste the full link, e.g. "https://t.me/aryanmods".
+  // The Telegram blocks on the home and app pages stay hidden until this is set.
+  telegram: "",
+
   // Optional links shown in the footer, e.g.
   //   socials: [{ label: "Telegram", url: "https://t.me/yourchannel" }]
   socials: []
