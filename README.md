@@ -152,6 +152,25 @@ What approval still needs, and cannot be solved by code:
 There is deliberately **no anti-adblock script, no popunder and no redirect ad**. Those
 networks pay a fraction of AdSense and get domains and accounts banned.
 
+## Telegram channel
+
+Set one field in `data/site.js`:
+
+```js
+telegram: "https://t.me/yourchannel"
+```
+
+That reveals a "New apps on Telegram" panel on the home page and a one-line
+pointer on every app page. Leave it empty and both disappear completely — no dead
+links, no empty boxes.
+
+Only the `https://t.me/<name>` form is accepted (the name is 3+ letters, numbers
+or underscores); anything else is ignored rather than rendered.
+
+Worth knowing before you rely on it: Telegram's ad-revenue share pays **channel
+owners**, not websites, needs **1,000+ subscribers**, and pays in TON. A website
+linking to a channel does not become monetised by Telegram.
+
 ## Affiliate and support links
 
 `data/affiliates.js` drives the "Support the site" panel:
