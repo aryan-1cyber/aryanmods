@@ -24,6 +24,7 @@ window.ADS = {
   slots: {
     homeFeed: "",     // home page, between "What's new" and "Support the site"
     appDetail: "",    // bottom of every app page
-    changelog: ""     // bottom of the changelog
+    changelog: "",    // bottom of the changelog
+    channel: ""       // channel.html, after the first two posts
   }
 };
